@@ -14,16 +14,26 @@ const app = express();
 // Body parser
 app.use(express.json());
 
-// Enable CORS
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'https://task-flow.rishabhpanesar.com',
+  'https://www.task-flow.rishabhpanesar.com'
+];
+
+// Enable CORS with explicit allow-list
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'http://localhost:3000',
-    'https://task-flow.rishabhpanesar.com',
-    "https://www.task-flow.rishabhpanesar.com"
-  ],
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
   credentials: true
 }));
+
+// Handle preflight requests
+app.options('*', cors());
 
 // Routes
 app.use('/api/auth', require('./routes/authRoutes'));
