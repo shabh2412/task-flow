@@ -19,7 +19,8 @@ app.use(cors({
   origin: [
     'http://localhost:5173',
     'http://localhost:3000',
-    'https://task-flow.rishabhpanesar.com'
+    'https://task-flow.rishabhpanesar.com',
+    "https://www.task-flow.rishabhpanesar.com"
   ],
   credentials: true
 }));
