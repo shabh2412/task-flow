@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+// Use environment variable or fallback to production URL
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://task-flow-be.rishabhpanesar.com/api';
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+  baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
